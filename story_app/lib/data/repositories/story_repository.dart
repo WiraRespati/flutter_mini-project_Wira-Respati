@@ -26,7 +26,7 @@ class StoryRepository {
       this.uploadStoryRemoteDataSource,
       this.locationStoryRemoteDataSource);
 
-  Future<List<ListStory>> getAllStories() async {
+  Future<ListStoryResponse> getAllStories() async {
     final token = await userLocalDataSource.getToken();
     return listStoryRemoteDataSource.getAllStories(token: token);
   }
@@ -36,7 +36,7 @@ class StoryRepository {
     return locationStoryRemoteDataSource.getLocations(token: token);
   }
 
-  Future<DetailStory> getDetailStories(String id) async {
+  Future<DetailStoryResponse> getDetailStories(String id) async {
     final token = await userLocalDataSource.getToken();
     return detailStoryRemoteDataSource.getDetailStory(token: token, id: id);
   }

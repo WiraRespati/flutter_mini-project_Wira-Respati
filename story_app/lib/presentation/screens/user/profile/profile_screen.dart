@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 listener: (context, state) {
                                   if (state is AuthLogoutSuccess) {
                                     Navigator.pushReplacementNamed(
-                                        context, NameRoutes.loginPageRoute);
+                                        context, NameRoutes.initRoute);
                                   } else if (state is AuthFailure) {
                                     ShowDialogWidget.showErrorDialog(
                                       context: context,

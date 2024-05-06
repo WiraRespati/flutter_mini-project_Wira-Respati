@@ -9,6 +9,14 @@ class DetailStoryResponse {
     required this.story,
   });
 
+  factory DetailStoryResponse.fromJson(Map<String, dynamic> json) {
+    return DetailStoryResponse(
+      error: json['error'] ?? true,
+      message: json['message'] ?? '',
+      story: DetailStory.fromJson(json['story']),
+    );
+  }
+
 }
 
 class DetailStory {

@@ -9,6 +9,14 @@ class ListStoryResponse {
     required this.listStory,
   });
 
+  factory ListStoryResponse.fromJson(Map<String, dynamic> json) {
+    return ListStoryResponse(
+      error: json['error'],
+      message: json['message'],
+      listStory: (json['listStory'] as List).map((story) => ListStory.fromJson(story)).toList(),
+    );
+  }
+
 }
 
 class ListStory {

@@ -18,17 +18,17 @@ class ListStoryLoading extends ListStoryState {
 }
 
 class ListStorySuccess extends ListStoryState {
-  final List<ListStory> stories;
+  final ListStoryResponse stories;
 
   const ListStorySuccess({
     required this.stories,
   });
 
   ListStorySuccess copyWith({
-    List<ListStory>? stories,
+    required ListStoryResponse stories,
   }) {
     return ListStorySuccess(
-      stories: stories ?? this.stories,
+      stories: stories,
     );
   }
 }

@@ -8,7 +8,7 @@ import '../../../../utils/constant/validation.dart';
 class ListStoryRemoteDataSource {
   static Dio dio = Dio();
 
-  Future<List<ListStory>> getAllStories({
+  Future<ListStoryResponse> getAllStories({
     int page = 1,
     int size = 20,
     required String token,
@@ -26,11 +26,9 @@ class ListStoryRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> storyList = response.data['listStory'];
-        final List<ListStory> parsedStoryList =
-            storyList.map((json) => ListStory.fromJson(json)).toList();
-        print(response.data);
-        return parsedStoryList;
+        final list = ListStoryResponse.fromJson(response.data);
+        print("status: ${response.statusMessage}");
+        return list;
       } else {
         throw Exception('Failed to load stories: ${response.statusCode}');
       }

@@ -34,7 +34,6 @@ void main() {
     final userRepository = UserRepository(userRemote, userLocal);
     final listStoryRemote = ListStoryRemoteDataSource();
     final locationStoryRemote = LocationStoryRemoteDataSource();
-
     final detailStoryRemote = DetailStoryRemoteDataSource();
     final uploadStoryRemote = UploadStoryRemoteDataSource();
     final storyRepository =

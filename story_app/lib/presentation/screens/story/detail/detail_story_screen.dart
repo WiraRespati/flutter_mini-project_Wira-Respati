@@ -35,22 +35,59 @@ class _DetailStoryScreenState extends State<DetailStoryScreen> {
         body: BlocBuilder<DetailStoryBloc, DetailStoryState>(
           builder: (context, state) {
             if (state is DetailStoryLoading) {
-              return const Center(child: CircularProgressIndicator(),);
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else if (state is DetailStorySuccess) {
-              final date = DateConstant.minute(state.stories.createdAt.toString());
+              final date =
+                  DateConstant.minute(state.stories.story.createdAt.toString());
+              final detail = state.stories.story;
               return Column(
                 children: [
                   StoryItemWidget(
-                      name: state.stories.name,
-                      description: state.stories.description,
+                      name: detail.name,
+                      description: detail.description,
                       date: date,
-                      photoUrl: state.stories.photoUrl)
+                      photoUrl: detail.photoUrl)
                 ],
               );
             } else if (state is DetailStoryFailure) {
-              return Center(child: Text('Failed to load story: ${state.error}'),);
+              return Center(
+                  child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Failed to load story: ${state.error}'),
+                    IconButton(
+                      icon: const Icon(Icons.refresh),
+                      onPressed: () {
+                        BlocProvider.of<DetailStoryBloc>(context)
+                            .add(DetailStoryButtonPressed(storyId));
+                      },
+                    )
+                  ],
+                ),
+              ));
             } else {
-              return const Text('Unknown error');
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Unknown Error'),
+                      IconButton(
+                        icon: const Icon(Icons.refresh),
+                        onPressed: () {
+                          BlocProvider.of<DetailStoryBloc>(context)
+                              .add(DetailStoryButtonPressed(storyId));
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              );
             }
           },
         ));

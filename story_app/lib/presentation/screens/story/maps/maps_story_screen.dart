@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:story_app/utils/constant/name_routes.dart';
 
 import '../../../bloc/story/location/location_story_bloc.dart';
 import '../../../bloc/story/location/location_story_event.dart';
@@ -49,6 +50,11 @@ class _MapsStoryScreenState extends State<MapsStoryScreen> {
                   infoWindow: InfoWindow(
                     title: story.name,
                     snippet: story.description,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context, NameRoutes.detailStoryPageRoute,
+                        arguments: story.id);
+                    },
                   ),
                 ),
               );
@@ -65,7 +71,24 @@ class _MapsStoryScreenState extends State<MapsStoryScreen> {
           } else if (state is LocationStoryLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is LocationStoryFailure) {
-            return Center(child: Text(state.error));
+           return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Failed to load stories: ${state.error}'),
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () {
+                      BlocProvider.of<LocationStoryBloc>(context)
+                          .add(const LocationStoryButtonPressed());
+                    },
+                  )
+                ],
+              ),
+            ),
+          );
           } else {
             return const Center(child: Text('No data'));
           }

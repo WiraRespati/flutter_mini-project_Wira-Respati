@@ -18,7 +18,7 @@ class DetailStoryLoading extends DetailStoryState {
 }
 
 class DetailStorySuccess extends DetailStoryState {
-  final DetailStory stories;
+  final DetailStoryResponse stories;
 
   const DetailStorySuccess({
     required this.stories,

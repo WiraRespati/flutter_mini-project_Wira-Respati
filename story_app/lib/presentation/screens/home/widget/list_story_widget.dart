@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,9 +33,12 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.minScrollExtent &&
-        _scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-      BlocProvider.of<ListStoryBloc>(context).add(const ListStoryButtonPressed());
+    if (_scrollController.position.pixels ==
+            _scrollController.position.minScrollExtent &&
+        _scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse) {
+      BlocProvider.of<ListStoryBloc>(context)
+          .add(const ListStoryButtonPressed());
     }
   }
 
@@ -52,13 +54,14 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
           return RefreshIndicator(
             onRefresh: () async {
               // Trigger refresh when user pulls the screen upwards
-              BlocProvider.of<ListStoryBloc>(context).add(const ListStoryButtonPressed());
+              BlocProvider.of<ListStoryBloc>(context)
+                  .add(const ListStoryButtonPressed());
             },
             child: ListView.builder(
               controller: _scrollController,
-              itemCount: state.stories.length,
+              itemCount: state.stories.listStory.length,
               itemBuilder: (context, index) {
-                final story = state.stories[index];
+                final story = state.stories.listStory[index];
                 final date = DateConstant.minute(story.createdAt.toString());
                 return StoryItemWidget(
                   name: story.name,
@@ -66,7 +69,9 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
                   date: date,
                   photoUrl: story.photoUrl,
                   onTap: () {
-                    Navigator.pushNamed(context, NameRoutes.detailStoryPageRoute,arguments: story.id);
+                    Navigator.pushNamed(
+                        context, NameRoutes.detailStoryPageRoute,
+                        arguments: story.id);
                   },
                 );
               },
@@ -74,11 +79,41 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
           );
         } else if (state is ListStoryFailure) {
           return Center(
-            child: Text('Failed to load stories: ${state.error}'),
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Failed to load stories: ${state.error}'),
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () {
+                      BlocProvider.of<ListStoryBloc>(context)
+                          .add(const ListStoryButtonPressed());
+                    },
+                  )
+                ],
+              ),
+            ),
           );
         } else {
-          return const Center(
-            child: Text('Terjadi kesalahan yang tidak diketahui'),
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Unknown Error'),
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () {
+                      BlocProvider.of<ListStoryBloc>(context)
+                          .add(const ListStoryButtonPressed());
+                    },
+                  )
+                ],
+              ),
+            ),
           );
         }
       },

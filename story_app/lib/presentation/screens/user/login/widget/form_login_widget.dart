@@ -77,7 +77,7 @@ class _FormLoginWidgetState extends State<FormLoginWidget> {
         BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              Navigator.pushReplacementNamed(context, NameRoutes.navigationPageRoute);
+              Navigator.pushReplacementNamed(context, NameRoutes.initRoute);
             } else if (state is LoginFailure) {
               ShowDialogWidget.showErrorDialog(
                 context: context,
