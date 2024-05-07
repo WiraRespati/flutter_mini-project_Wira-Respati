@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
 class Validation {
-  static String? validateName(String name) {
+  static String? validateNotEmpty(String name, String errorName) {
     if (name.isEmpty) {
-      return "Name cannot be empty";
+      return "$errorName cannot be empty";
     }
     return null;
   }

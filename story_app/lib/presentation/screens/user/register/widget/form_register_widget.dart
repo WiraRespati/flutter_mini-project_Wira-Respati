@@ -53,7 +53,7 @@ class _FormRegisterWidgetState extends State<FormRegisterWidget> {
           errorText: _nameErrorText,
           onChange: (value) {
             setState(() {
-              _nameErrorText = Validation.validateName(value);
+              _nameErrorText = Validation.validateNotEmpty(value,"Name");
             });
           },
           isPass: false,
@@ -120,7 +120,7 @@ class _FormRegisterWidgetState extends State<FormRegisterWidget> {
                   final email = _emailController.text;
                   final password = _passwordController.text;
 
-                  _nameErrorText = Validation.validateName(name);
+                  _nameErrorText = Validation.validateNotEmpty(name,"Name");
                   _emailErrorText = Validation.validateEmail(email);
                   _passwordErrorText = Validation.validatePassword(password);
                   if (_nameErrorText != null) {
@@ -142,7 +142,6 @@ class _FormRegisterWidgetState extends State<FormRegisterWidget> {
                       message: _passwordErrorText!,
                     );
                   } else {
-                    // Jika tidak ada pesan kesalahan, buat model register dan kirim data
                     final registerModel = RegisterRequestModel(
                         name: name, email: email, password: password);
                     context
