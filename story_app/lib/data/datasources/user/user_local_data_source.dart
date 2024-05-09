@@ -25,16 +25,14 @@ class UserLocalDataSource {
     await sharedPreferences.setString(tokenKey, token);
     await sharedPreferences.setString(nameKey, name);
     await sharedPreferences.setString(emailKey, email);
-    print(
-        'Auth data saved to SharedPreferences: Token: $token, Name: $name, Email: $email');
+    
   }
 
   Future<void> deleteAuth() async {
     await sharedPreferences.remove(tokenKey);
     await sharedPreferences.remove(nameKey);
     await sharedPreferences.remove(emailKey);
-    print(
-        'Auth data deleted from SharedPreferences: Token: $token, Name: $name, Email: $email');
+    
   }
 
   Future<bool> isLoggedIn() async {
@@ -47,7 +45,7 @@ class UserLocalDataSource {
           await SharedPreferences.getInstance();
       return sharedPreferences.getString(tokenKey) ?? '';
     } catch (e) {
-      print('Error getting token from SharedPreferences: $e');
+     
       return ''; // Or return a default value if desired
     }
   }

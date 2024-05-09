@@ -10,6 +10,6 @@ class ImagePickerConstant {
       source: isCamera ? ImageSource.camera : ImageSource.gallery,
     );
 
-    return result!;
+    return result;
   }
 }

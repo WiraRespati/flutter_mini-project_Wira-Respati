@@ -117,7 +117,7 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)),
-                color: ColorConstant.webBackgroundColor,
+                color: ColorConstant.onPrimaryColor,
               ),
               child: Row(
                 children: [
@@ -190,7 +190,7 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
             ),
             Divider(
               height: 1,
-              color: ColorConstant.webBackgroundColor,
+              color: ColorConstant.onPrimaryColor,
             ),
             const SizedBox(
               height: 16,

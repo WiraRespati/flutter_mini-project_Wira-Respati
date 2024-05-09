@@ -11,28 +11,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final webScreenSize = 600;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: MediaQuery.of(context).size.width > webScreenSize
-              ? EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width / 3)
-              : const EdgeInsets.symmetric(horizontal: 32),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return  const Scaffold(
+      body:  SingleChildScrollView(
+        child:  Padding(
+          padding: EdgeInsets.all(32.0),
+          child:  Column(
             children: [
-              Flexible(flex: 2, child: Container()),
-              const HeaderLoginWidget(),
-              const SizedBox(height: 64),
-              const FormLoginWidget(),
-              const SizedBox(height: 24),
-              Flexible(flex: 2, child: Container()),
-              const FooterLoginWidget()
+              SizedBox(height: 24), // Tambahkan ruang atas
+              HeaderLoginWidget(),
+              SizedBox(height: 8),
+              FormLoginWidget(),
+              SizedBox(height: 24),
+              FooterLoginWidget(),
+              SizedBox(height: 24), // Tambahkan ruang bawah
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app/data/datasources/story/detail/detail_story_remote_data_source.dart';
 import 'package:story_app/data/datasources/story/list/list_story_remote_data_source.dart';
@@ -24,10 +25,12 @@ import 'package:story_app/presentation/screens/story/detail/detail_story_screen.
 import 'package:story_app/presentation/screens/user/login/login_screen.dart';
 import 'package:story_app/presentation/screens/user/register/register_screen.dart';
 import 'package:story_app/utils/constant/color_constant.dart';
+import 'package:story_app/utils/constant/const.dart';
 import 'package:story_app/utils/constant/name_routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Gemini.init(apiKey: geminiKey);
   SharedPreferences.getInstance().then((SharedPreferences sharedPreferences) {
     final userRemote = UserRemoteDataSource();
     final userLocal = UserLocalDataSource(sharedPreferences: sharedPreferences);
@@ -36,15 +39,15 @@ void main() {
     final locationStoryRemote = LocationStoryRemoteDataSource();
     final detailStoryRemote = DetailStoryRemoteDataSource();
     final uploadStoryRemote = UploadStoryRemoteDataSource();
-    final storyRepository =
-        StoryRepository(userLocal, listStoryRemote, detailStoryRemote,uploadStoryRemote,locationStoryRemote);
+    final storyRepository = StoryRepository(userLocal, listStoryRemote,
+        detailStoryRemote, uploadStoryRemote, locationStoryRemote);
     runApp(MyApp(
       userRepository: userRepository,
       storyRepository: storyRepository,
     ));
   });
 }
-
+                                   
 class MyApp extends StatelessWidget {
   final UserRepository userRepository;
   final StoryRepository storyRepository;
@@ -55,7 +58,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-
         providers: [
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(userRepository),
@@ -90,7 +92,8 @@ class MyApp extends StatelessWidget {
             NameRoutes.registerPageRoute: (context) => const RegisterScreen(),
             NameRoutes.loginPageRoute: (context) => const LoginScreen(),
             NameRoutes.homePageRoute: (context) => const HomeScreen(),
-            NameRoutes.navigationPageRoute: (context) => const NavigationScreen(),
+            NameRoutes.navigationPageRoute: (context) =>
+                const NavigationScreen(),
             NameRoutes.detailStoryPageRoute: (context) =>
                 const DetailStoryScreen(),
           },

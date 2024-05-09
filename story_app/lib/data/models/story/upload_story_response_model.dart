@@ -1,10 +1,10 @@
 class UploadStoryResponseModel {
-  final bool error;
-  final String message;
+  final bool? error;
+  final String? message;
 
   UploadStoryResponseModel({
-    required this.error,
-    required this.message,
+    this.error,
+    this.message,
   });
 
   factory UploadStoryResponseModel.fromJson(Map<String, dynamic> json) {

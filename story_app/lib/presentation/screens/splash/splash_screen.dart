@@ -33,9 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
               NameRoutes.navigationPageRoute,
               (route) => false,
             );
-          } else if (state is AuthLogoutSuccess) {
-            // Handle logout logic here, e.g., clear user data, navigate to login
-            print('User logged out successfully');
           } else if (state is AuthFailure) {
             Navigator.pushNamedAndRemoveUntil(
               context,

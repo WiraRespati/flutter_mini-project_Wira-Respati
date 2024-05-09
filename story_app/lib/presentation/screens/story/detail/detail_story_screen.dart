@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/presentation/screens/home/widget/story_item_widget.dart';
+import 'package:story_app/presentation/screens/story/detail/header_detail_widget.dart';
 
 import '../../../../utils/constant/date_constant.dart';
 import '../../../bloc/story/detail/detail_story_bloc.dart';
@@ -29,7 +30,7 @@ class _DetailStoryScreenState extends State<DetailStoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Detail Story"),
+          title: const HeaderDetailWidget(),
           centerTitle: true,
         ),
         body: BlocBuilder<DetailStoryBloc, DetailStoryState>(
@@ -40,15 +41,15 @@ class _DetailStoryScreenState extends State<DetailStoryScreen> {
               );
             } else if (state is DetailStorySuccess) {
               final date =
-                  DateConstant.minute(state.stories.story.createdAt.toString());
+                  DateConstant.minute(state.stories.story!.createdAt.toString());
               final detail = state.stories.story;
               return Column(
                 children: [
                   StoryItemWidget(
-                      name: detail.name,
-                      description: detail.description,
+                      name: detail?.name,
+                      description: detail?.description,
                       date: date,
-                      photoUrl: detail.photoUrl)
+                      photoUrl: detail?.photoUrl)
                 ],
               );
             } else if (state is DetailStoryFailure) {

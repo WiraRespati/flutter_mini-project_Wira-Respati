@@ -1,0 +1,1 @@
+const String geminiKey = "AIzaSyB1hMWCQ532XKsTwGNe_HWvjDmRZ8JoYFo";

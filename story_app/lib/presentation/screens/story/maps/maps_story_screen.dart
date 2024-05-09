@@ -44,7 +44,7 @@ class _MapsStoryScreenState extends State<MapsStoryScreen> {
             for (var story in state.stories) {
               _markers.add(
                 Marker(
-                  markerId: MarkerId(story.name),
+                  markerId: MarkerId(story.name!),
                   position:
                       LatLng(story.lat!.toDouble(), story.lon!.toDouble()),
                   infoWindow: InfoWindow(

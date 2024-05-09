@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story_app/presentation/screens/home/widget/story_item_widget.dart';
-import 'package:story_app/utils/constant/date_constant.dart';
+import 'package:story_app/presentation/bloc/story/list/list_story_bloc.dart';
+import 'package:story_app/presentation/bloc/story/list/list_story_event.dart';
+import 'package:story_app/presentation/bloc/story/list/list_story_state.dart';
+import 'package:story_app/presentation/screens/home/widget/story_highlight_widget.dart';
+import 'package:story_app/utils/constant/name_routes.dart';
 
-import '../../../../utils/constant/name_routes.dart';
-import '../../../bloc/story/list/list_story_bloc.dart';
-import '../../../bloc/story/list/list_story_event.dart';
-import '../../../bloc/story/list/list_story_state.dart';
-
-class ListStoryWidget extends StatefulWidget {
-  const ListStoryWidget({super.key});
+class ListStoryHighlightWidget extends StatefulWidget {
+  const ListStoryHighlightWidget({super.key});
 
   @override
-  State<ListStoryWidget> createState() => _ListStoryWidgetState();
+  State<ListStoryHighlightWidget> createState() =>
+      _ListStoryHighlightWidgetState();
 }
 
-class _ListStoryWidgetState extends State<ListStoryWidget> {
+class _ListStoryHighlightWidgetState extends State<ListStoryHighlightWidget> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -58,16 +57,13 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
                   .add(const ListStoryButtonPressed());
             },
             child: ListView.builder(
+              scrollDirection: Axis.horizontal,
               controller: _scrollController,
               itemCount: state.stories.listStory?.length,
               itemBuilder: (context, index) {
                 final story = state.stories.listStory![index];
-                final date = DateConstant.minute(story.createdAt.toString());
-                return StoryItemWidget(
-                  name: story.name,
-                  description: story.description,
-                  date: date,
-                  photoUrl: story.photoUrl,
+                return StoryHighlightWidget(
+                  name: story.name!,
                   onTap: () {
                     Navigator.pushNamed(
                         context, NameRoutes.detailStoryPageRoute,

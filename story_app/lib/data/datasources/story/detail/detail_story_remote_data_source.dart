@@ -4,7 +4,7 @@ import '../../../../utils/base_url.dart';
 import '../../../models/story/detail_story_response.dart';
 
 class DetailStoryRemoteDataSource {
-  static Dio _dio = Dio();
+  static final Dio _dio = Dio();
 
   Future<DetailStoryResponse> getDetailStory({required String token, required String id}) async {
     try {
@@ -17,7 +17,6 @@ class DetailStoryRemoteDataSource {
 
       if (response.statusCode == 200) {
         final detail = DetailStoryResponse.fromJson(response.data);
-        print("status: ${response.statusMessage}");
         return detail;
       } else {
         throw Exception('Failed to load detail story: ${response.statusMessage}');

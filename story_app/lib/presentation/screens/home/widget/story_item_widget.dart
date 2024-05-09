@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../../utils/constant/color_constant.dart';
 
 class StoryItemWidget extends StatelessWidget {
-  final String name;
-  final String description;
-  final String date;
-  final String photoUrl;
+  final String? name;
+  final String? description;
+  final String? date;
+  final String? photoUrl;
   final Function()? onTap;
 
   const StoryItemWidget({
     super.key,
-    required this.name,
-    required this.description,
-    required this.date,
-    required this.photoUrl,
+     this.name,
+     this.description,
+     this.date,
+     this.photoUrl,
     this.onTap,
   });
 
@@ -29,22 +29,22 @@ class StoryItemWidget extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const EdgeInsets.all(8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           CircleAvatar(
-                            backgroundColor: ColorConstant.webBackgroundColor,
+                            backgroundColor: ColorConstant.onPrimaryColor,
                             radius: 18,
-                            child: Text(name[0].toUpperCase()),
+                            child: Text(name![0].toUpperCase()),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 4),
                             child: Column(
                               children: [
-                                Text(name),
+                                Text(name!),
                               ],
                             ),
                           )
@@ -65,7 +65,7 @@ class StoryItemWidget extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.5,
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/loading.gif',
-                    image: photoUrl,
+                    image: photoUrl!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -103,7 +103,7 @@ class StoryItemWidget extends StatelessWidget {
                           children: [
                             Text("$name "),
                             Expanded(
-                              child: Text(description),
+                              child: Text(description!),
                             )
                           ],
                         ),

@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Padding(
                           padding: const EdgeInsets.all(16),
                           child: CircleAvatar(
-                            backgroundColor: ColorConstant.webBackgroundColor,
+                            backgroundColor: ColorConstant.onPrimaryColor,
                             radius: 36,
                             child: Text(user.name[0].toUpperCase()),
                           ),

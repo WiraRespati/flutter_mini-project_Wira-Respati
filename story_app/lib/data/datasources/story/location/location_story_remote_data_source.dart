@@ -32,7 +32,6 @@ class LocationStoryRemoteDataSource {
         final List<dynamic> storyList = response.data['listStory'];
         final List<ListStory> parsedStoryList =
             storyList.map((json) => ListStory.fromJson(json)).toList();
-        print(response.data);
         return parsedStoryList;
       } else {
         throw Exception('Failed to load stories: ${response.statusCode}');

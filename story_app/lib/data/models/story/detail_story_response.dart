@@ -1,12 +1,12 @@
 class DetailStoryResponse {
-  bool error;
-  String message;
-  DetailStory story;
+  bool? error;
+  String? message;
+  DetailStory? story;
 
   DetailStoryResponse({
-    required this.error,
-    required this.message,
-    required this.story,
+    this.error,
+    this.message,
+    this.story,
   });
 
   factory DetailStoryResponse.fromJson(Map<String, dynamic> json) {
@@ -16,26 +16,25 @@ class DetailStoryResponse {
       story: DetailStory.fromJson(json['story']),
     );
   }
-
 }
 
 class DetailStory {
-  String id;
-  String name;
-  String description;
-  String photoUrl;
-  DateTime createdAt;
+  String? id;
+  String? name;
+  String? description;
+  String? photoUrl;
+  DateTime? createdAt;
   num? lat;
   num? lon;
 
   DetailStory({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.photoUrl,
-    required this.createdAt,
-    required this.lat,
-    required this.lon,
+    this.id,
+    this.name,
+    this.description,
+    this.photoUrl,
+    this.createdAt,
+    this.lat,
+    this.lon,
   });
   factory DetailStory.fromJson(Map<String, dynamic> json) {
     return DetailStory(

@@ -34,7 +34,6 @@ class UploadStoryRemoteDataSource {
 
       final uploadStoryResponse =
           UploadStoryResponseModel.fromJson(response.data);
-      print('Upload successful: ${uploadStoryResponse.message}');
       return uploadStoryResponse;
     } catch (e) {
       Validation.handleError(e);

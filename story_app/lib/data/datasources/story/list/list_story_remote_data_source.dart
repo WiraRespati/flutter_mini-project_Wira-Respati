@@ -27,7 +27,6 @@ class ListStoryRemoteDataSource {
 
       if (response.statusCode == 200) {
         final list = ListStoryResponse.fromJson(response.data);
-        print("status: ${response.statusMessage}");
         return list;
       } else {
         throw Exception('Failed to load stories: ${response.statusCode}');
