@@ -35,7 +35,7 @@ class _MapsStoryScreenState extends State<MapsStoryScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Story Locations'),
+        title: const Text('Story Locations',style: TextStyle(fontFamily: 'BriemHand'),),
         elevation: 2,
       ),
       body: BlocBuilder<LocationStoryBloc, LocationStoryState>(

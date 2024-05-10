@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Row(
               children: [
                 const Text(
-                  'Story App',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'StoryApp',
+                  style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'BriemHand'),
                 ),
                 IconButton(
                   onPressed: () {},

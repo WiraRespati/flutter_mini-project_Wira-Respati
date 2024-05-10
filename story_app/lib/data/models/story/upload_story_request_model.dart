@@ -17,12 +17,14 @@ class UploadStoryRequestModel {
     Map<String, dynamic> json = {
       'description': description,
       'photo': photo,
+      'lat' : lat,
+      'lon' :lon
     };
 
-    if (lat != null && lon != null) {
-      json['lat'] = lat;
-      json['lon'] = lon;
-    }
+    // if (lat != null && lon != null) {
+    //   json['lat'] = lat;
+    //   json['lon'] = lon;
+    // }
 
     return json;
   }

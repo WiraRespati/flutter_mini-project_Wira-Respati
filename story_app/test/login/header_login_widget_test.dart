@@ -11,6 +11,8 @@ void main() {
     ));
 
     expect(find.byType(Image), findsOneWidget);
+    expect(find.text("Login to share your story..."), findsOneWidget);
+
 
     final Finder imageFinder = find.byType(Image);
     expect(tester.getSize(imageFinder).width, 200);

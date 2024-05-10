@@ -13,6 +13,10 @@ class HeaderLoginWidget extends StatelessWidget {
             width: 200,
             height: 200,
           ),
+          const Text(
+            'Login to share your story...',
+            style: TextStyle(fontFamily: 'BriemHand'),
+          )
         ],
       ),
     );

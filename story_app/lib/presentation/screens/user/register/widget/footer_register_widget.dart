@@ -15,7 +15,7 @@ class FooterRegisterWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             vertical: 8,
           ),
-          child: const Text("Already have an account?"),
+          child: const Text("Already have an account?",style: TextStyle(fontFamily: 'BriemHand'),),
         ),
         GestureDetector(
           onTap: () {
@@ -27,7 +27,7 @@ class FooterRegisterWidget extends StatelessWidget {
             ),
             child: const Text(
               "Login",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'BriemHand'),
             ),
           ),
         )

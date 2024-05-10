@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:story_app/presentation/widgets/button_global_widget.dart';
@@ -7,7 +6,7 @@ import 'package:story_app/presentation/widgets/text_field_input.dart';
 import 'package:story_app/utils/constant/validation.dart';
 
 class ImplementAIScreen extends StatefulWidget {
-  const ImplementAIScreen({super.key});
+  const ImplementAIScreen({Key? key}) : super(key: key);
 
   @override
   State<ImplementAIScreen> createState() => _ImplementAIScreenState();
@@ -25,7 +24,7 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
   String? _cityErrorText;
   String? _themeErrorText;
   String? _budgetErrorText;
-  String? recommendation;
+  List<String> recommendations = []; // List untuk menyimpan rekomendasi
   bool _isLoading = false;
 
   @override
@@ -47,10 +46,10 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
     };
 
     final question =
-        "Berikan 1 rekomendasi nama tempat dan alamat di ${input['city']} dengan tema ${input['theme']} dan budget ${input['budget']} !";
-setState(() {
-  _isLoading = true;
-});
+        "Berikan 5 rekomendasi nama tempat di ${input['city']} dengan tema ${input['theme']} dan budget ${input['budget']} !";
+    setState(() {
+      _isLoading = true;
+    });
     await Gemini.instance.streamGenerateContent(question).forEach((event) {
       final responseParts = event.content?.parts;
       if (responseParts != null) {
@@ -59,8 +58,8 @@ setState(() {
           response += part.text!;
         }
         setState(() {
-          recommendation = response;
-           _isLoading = false;
+          recommendations.add(response);
+          _isLoading = false;
         });
         _cityController.clear();
         _themeController.clear();
@@ -73,12 +72,13 @@ setState(() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("AI to Recommend best place"),
+        title: const Text("AI to Recommend cool places",style: TextStyle(fontFamily: 'BriemHand'),),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -134,52 +134,78 @@ setState(() {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ButtonGlobalWidget(
-                  title: _isLoading == true?
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: CircularProgressIndicator(), // Tampilkan indikator loading jika sedang loading
-                ) : const Text("Generate"),
-                  onTap: () {
-                    final city = _cityController.text;
-                    final theme = _themeController.text;
-                    final budget = _budgetController.text;
+                  onTap: _isLoading
+                      ? null
+                      : () {
+                          final city = _cityController.text;
+                          final theme = _themeController.text;
+                          final budget = _budgetController.text;
 
-                    _cityErrorText =
-                        Validation.validateNotEmpty(city, "City Name");
-                    _themeErrorText =
-                        Validation.validateNotEmpty(theme, "Theme");
-                    _budgetErrorText =
-                        Validation.validateNotEmpty(budget, "Budget");
-                    if (_cityErrorText != null) {
-                      ShowDialogWidget.showErrorDialog(
-                        context: context,
-                        title: 'Validation Error',
-                        message: _cityErrorText!,
-                      );
-                    } else if (_themeErrorText != null) {
-                      ShowDialogWidget.showErrorDialog(
-                        context: context,
-                        title: 'Validation Error',
-                        message: _themeErrorText!,
-                      );
-                    } else if (_budgetErrorText != null) {
-                      ShowDialogWidget.showErrorDialog(
-                        context: context,
-                        title: 'Validation Error',
-                        message: _budgetErrorText!,
-                      );
-                    } else {
-                      _submitForm();
-                    }
-                  },
+                          _cityErrorText =
+                              Validation.validateNotEmpty(city, "City Name");
+                          _themeErrorText =
+                              Validation.validateNotEmpty(theme, "Theme");
+                          _budgetErrorText =
+                              Validation.validateNotEmpty(budget, "Budget");
+                          if (_cityErrorText != null) {
+                            ShowDialogWidget.showErrorDialog(
+                              context: context,
+                              title: 'Validation Error',
+                              message: _cityErrorText!,
+                            );
+                          } else if (_themeErrorText != null) {
+                            ShowDialogWidget.showErrorDialog(
+                              context: context,
+                              title: 'Validation Error',
+                              message: _themeErrorText!,
+                            );
+                          } else if (_budgetErrorText != null) {
+                            ShowDialogWidget.showErrorDialog(
+                              context: context,
+                              title: 'Validation Error',
+                              message: _budgetErrorText!,
+                            );
+                          } else {
+                            _submitForm();
+                          }
+                        },
+                  title: _isLoading
+                      ? const SizedBox(
+                          height: 20.0,
+                          width: 20.0,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2.0,
+                          ),
+                          // Tampilkan indikator loading jika sedang loading
+                        )
+                      : const Text("Generate"),
                 ),
               ),
-              if (recommendation != null)
+              // Tampilkan semua rekomendasi dalam list
+              if (recommendations.isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    'Recommendation:  \n$recommendation',
-                    style: const TextStyle(fontSize: 18),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Recommendations:',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8.0),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: recommendations.length,
+                        itemBuilder: (context, index) {
+                          return Text(
+                            '${index + 1}. ${recommendations[index]}',
+                            style: const TextStyle(fontSize: 16),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
             ],

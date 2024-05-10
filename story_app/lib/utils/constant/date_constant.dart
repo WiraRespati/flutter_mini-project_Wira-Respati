@@ -1,16 +1,15 @@
-class DateConstant{
-  static String minute(String date) {
+class DateConstant {
+  static String getTimeDifference(String date) {
     DateTime dateTime = DateTime.parse(date);
+    DateTime now = DateTime.now();
+    Duration difference = now.difference(dateTime);
 
-  // Mendapatkan objek DateTime untuk saat ini
-  DateTime now = DateTime.now();
-
-  // Menghitung perbedaan waktu antara createdAt dan now
-  Duration difference = now.difference(dateTime);
-
-  // Mengonversi perbedaan waktu menjadi jumlah hari
-  int daysPassed = difference.inMinutes;
-
-  return daysPassed.toString();
+    if (difference.inDays > 0) {
+      return '${difference.inDays} days ago';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours} hours ago';
+    } else {
+      return '${difference.inMinutes} minutes ago';
+    }
   }
 }

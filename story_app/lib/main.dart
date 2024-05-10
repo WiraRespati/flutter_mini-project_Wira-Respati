@@ -99,6 +99,7 @@ class MyApp extends StatelessWidget {
           },
           theme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: ColorConstant.mobileBackgroundColor),
+              
         ));
   }
 }

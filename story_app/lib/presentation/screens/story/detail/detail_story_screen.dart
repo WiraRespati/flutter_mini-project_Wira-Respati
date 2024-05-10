@@ -41,7 +41,7 @@ class _DetailStoryScreenState extends State<DetailStoryScreen> {
               );
             } else if (state is DetailStorySuccess) {
               final date =
-                  DateConstant.minute(state.stories.story!.createdAt.toString());
+                  DateConstant.getTimeDifference(state.stories.story!.createdAt.toString());
               final detail = state.stories.story;
               return Column(
                 children: [

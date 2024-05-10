@@ -46,8 +46,8 @@ class ListStory {
       description: json['description'],
       photoUrl: json['photoUrl'],
       createdAt: DateTime.parse(json['createdAt']),
-      lat: json['lat'] as double?,
-      lon: json['lon'] as double?,
+      lat: json['lat'],
+      lon: json['lon'],
     );
   }
 }

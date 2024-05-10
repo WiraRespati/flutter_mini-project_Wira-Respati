@@ -45,7 +45,7 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
         LocationPermission permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
           ShowDialogWidget.showErrorDialog(
-            context: context,
+            context: context.mounted ? context : context,
             title: 'Location Permission Denied',
             message: 'Please enable location permission to use this feature.',
           );
@@ -59,14 +59,13 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
             });
           } catch (e) {
             ShowDialogWidget.showErrorDialog(
-              context: context,
+              context: context.mounted ? context : context,
               title: 'Location Retrieval Error',
               message: 'Failed to retrieve location. Please try again later.',
             );
           }
         }
       } else {
-        // Ketika checkbox tidak dicentang, atur lat dan lon menjadi null
         setState(() {
           lat = null;
           lon = null;
@@ -79,7 +78,10 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Upload Story'),
+        title: const Text(
+          'Upload Story',
+          style: TextStyle(fontFamily: 'BriemHand'),
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close),
@@ -112,11 +114,11 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
             ),
             Container(
               padding: const EdgeInsets.all(4.0),
-              margin: const EdgeInsets.only(right: 4),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
                 color: ColorConstant.onPrimaryColor,
               ),
               child: Row(
@@ -260,28 +262,38 @@ class _UploadStoryScreenState extends State<UploadStoryScreen> {
                           final description = _descriptionController.text;
                           final latitude = lat;
                           final longitude = lon;
-                          if (description.isNotEmpty) {
-                            if (checkValue == true) {
-                              final upload = UploadStoryRequestModel(
+
+                          if (xFile != null) {
+                            if (description.isNotEmpty) {
+                              if (checkValue == true) {
+                                final upload = UploadStoryRequestModel(
                                   description: description,
                                   photo: File(xFile!.path),
                                   lat: latitude,
-                                  lon: longitude);
-                              context
-                                  .read<UploadStoryBloc>()
-                                  .add(UploadStoryButtonPressed(upload));
-                            }else{
+                                  lon: longitude,
+                                );
+                                context
+                                    .read<UploadStoryBloc>()
+                                    .add(UploadStoryButtonPressed(upload));
+                              } else {
+                                ShowDialogWidget.showErrorDialog(
+                                  context: context,
+                                  title: 'Validation Error',
+                                  message: "You must add Location",
+                                );
+                              }
+                            } else {
                               ShowDialogWidget.showErrorDialog(
-                              context: context,
-                              title: 'Validation Error',
-                              message: "You must add Location",
-                            );
+                                context: context,
+                                title: 'Validation Error',
+                                message: "Description cannot be empty",
+                              );
                             }
                           } else {
                             ShowDialogWidget.showErrorDialog(
                               context: context,
                               title: 'Validation Error',
-                              message: "Description cannot be empty",
+                              message: "Image cannot be empty",
                             );
                           }
                         },

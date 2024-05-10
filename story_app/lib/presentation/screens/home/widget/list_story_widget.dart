@@ -62,7 +62,7 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
               itemCount: state.stories.listStory?.length,
               itemBuilder: (context, index) {
                 final story = state.stories.listStory![index];
-                final date = DateConstant.minute(story.createdAt.toString());
+                final date = DateConstant.getTimeDifference(story.createdAt.toString());
                 return StoryItemWidget(
                   name: story.name,
                   description: story.description,

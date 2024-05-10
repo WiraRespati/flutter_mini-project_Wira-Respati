@@ -11,10 +11,10 @@ class StoryItemWidget extends StatelessWidget {
 
   const StoryItemWidget({
     super.key,
-     this.name,
-     this.description,
-     this.date,
-     this.photoUrl,
+    this.name,
+    this.description,
+    this.date,
+    this.photoUrl,
     this.onTap,
   });
 
@@ -96,22 +96,23 @@ class StoryItemWidget extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text("$name "),
-                            Expanded(
-                              child: Text(description!),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [Text("$date minutes ago")],
-                        )
-                      ],
-                    ))
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text("$name "),
+                          Expanded(
+                            child: Text(description!),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [Text("$date")],
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
