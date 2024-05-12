@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/presentation/screens/home/widget/story_item_widget.dart';
+import 'package:story_app/presentation/screens/story/detail/detail_story_maps_widget.dart';
 import 'package:story_app/presentation/screens/story/detail/header_detail_widget.dart';
+import 'package:story_app/utils/constant/color_constant.dart';
 
 import '../../../../utils/constant/date_constant.dart';
 import '../../../bloc/story/detail/detail_story_bloc.dart';
@@ -40,17 +42,32 @@ class _DetailStoryScreenState extends State<DetailStoryScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is DetailStorySuccess) {
-              final date =
-                  DateConstant.getTimeDifference(state.stories.story!.createdAt.toString());
+              final date = DateConstant.getTimeDifference(
+                  state.stories.story!.createdAt.toString());
               final detail = state.stories.story;
-              return Column(
-                children: [
-                  StoryItemWidget(
-                      name: detail?.name,
-                      description: detail?.description,
-                      date: date,
-                      photoUrl: detail?.photoUrl)
-                ],
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StoryItemWidget(
+                        name: detail?.name,
+                        description: detail?.description,
+                        date: date,
+                        photoUrl: detail?.photoUrl),
+                    (detail?.lat != null && detail?.lon != null)
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              margin: const EdgeInsets.all(32),
+                              height: 500,
+                              width: MediaQuery.of(context).size.width,
+                              color: ColorConstant.onPrimaryColor,
+                              child: DetailStoryMapsWidget(
+                                  lat: detail!.lat!, lon: detail.lon!),
+                            ),
+                          )
+                        : const Center(child: Text('Lokasi tidak tersedia')),
+                  ],
+                ),
               );
             } else if (state is DetailStoryFailure) {
               return Center(

@@ -15,16 +15,17 @@ class StoryHighlightWidget extends StatelessWidget {
       child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
-            
             children: [
               CircleAvatar(
                 backgroundColor: ColorConstant.onPrimaryColor,
                 radius: 42,
                 child: Text(name[0].toUpperCase()),
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.only(top: 4),
-                child: Text(name),
+                child: Text(
+                  name.length > 10 ? '${name.substring(0, 10)}...' : name,
+                ),
               ),
             ],
           )),

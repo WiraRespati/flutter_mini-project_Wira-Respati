@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:story_app/presentation/bloc/story/list/list_story_bloc.dart';
+import 'package:story_app/presentation/bloc/story/list/list_story_event.dart';
+import 'package:story_app/presentation/screens/home/widget/home_appbar_widget.dart';
 import 'package:story_app/presentation/screens/home/widget/list_story_highlight_widget.dart';
 import 'package:story_app/presentation/screens/home/widget/list_story_widget.dart';
 
@@ -10,53 +14,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                const SizedBox(width: 12,),
-                const Text(
-                  'StoryApp',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'BriemHand',fontSize: 24),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.arrow_drop_down),
-                ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite_border),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.message_outlined),
-                    ),
-                  ],
-                ))
-              ],
-            ),
-          ),
-          SizedBox(
+    return CustomScrollView(
+      slivers: <Widget>[
+        const SliverAppBar(
+          title: HomeAppBarWidget(),
+          floating: true,
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(
             height: 124,
-            width: MediaQuery.of(context)
-                .size
-                .width, 
+            width: MediaQuery.of(context).size.width,
             child: const ListStoryHighlightWidget(),
           ),
-          const ListStoryWidget(),
-        ],
-      ),
+        ),
+        const SliverToBoxAdapter(
+          child: ListStoryWidget(),
+        ),
+      ],
     );
-
   }
 }

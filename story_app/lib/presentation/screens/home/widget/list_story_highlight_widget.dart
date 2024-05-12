@@ -73,39 +73,26 @@ class _ListStoryHighlightWidgetState extends State<ListStoryHighlightWidget> {
             ),
           );
         } else if (state is ListStoryFailure) {
-          return Center(
+          return const Center(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: EdgeInsets.all(32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Failed to load stories: ${state.error}'),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: () {
-                      BlocProvider.of<ListStoryBloc>(context)
-                          .add(const ListStoryButtonPressed());
-                    },
-                  )
+                  Text(
+                      'Failed to load stories: Check your internet connection'),
                 ],
               ),
             ),
           );
         } else {
-          return Center(
+          return const Center(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: EdgeInsets.all(32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Unknown Error'),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: () {
-                      BlocProvider.of<ListStoryBloc>(context)
-                          .add(const ListStoryButtonPressed());
-                    },
-                  )
+                  Text('Unknown Error'),
                 ],
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_app/presentation/widgets/show_dialog_widget.dart';
 
 import '../../../../utils/constant/color_constant.dart';
 
@@ -53,7 +54,13 @@ class StoryItemWidget extends StatelessWidget {
                       Row(
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ShowDialogWidget.showErrorDialog(
+                                  title: 'Coming Soon',
+                                  message: 'This feature is not available yet',
+                                  context: context,
+                                );
+                              },
                               icon: const Icon(Icons.more_vert))
                         ],
                       )
@@ -75,21 +82,46 @@ class StoryItemWidget extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ShowDialogWidget.showErrorDialog(
+                              title: 'Coming Soon',
+                              message: 'This feature is not available yet',
+                              context: context,
+                            );
+                          },
                           icon: const Icon(Icons.favorite),
                           color: Colors.red,
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ShowDialogWidget.showErrorDialog(
+                                title: 'Coming Soon',
+                                message: 'This feature is not available yet',
+                                context: context,
+                              );
+                            },
                             icon: const Icon(Icons.mode_comment_outlined)),
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.send)),
+                            onPressed: () {
+                              ShowDialogWidget.showErrorDialog(
+                                title: 'Coming Soon',
+                                message: 'This feature is not available yet',
+                                context: context,
+                              );
+                            },
+                            icon: const Icon(Icons.send)),
                       ],
                     ),
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ShowDialogWidget.showErrorDialog(
+                                title: 'Coming Soon',
+                                message: 'This feature is not available yet',
+                                context: context,
+                              );
+                            },
                             icon: const Icon(Icons.archive_outlined)),
                       ],
                     )
@@ -103,7 +135,14 @@ class StoryItemWidget extends StatelessWidget {
                         children: [
                           Text("$name "),
                           Expanded(
-                            child: Text(description!),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Text(
+                                description!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           )
                         ],
                       ),

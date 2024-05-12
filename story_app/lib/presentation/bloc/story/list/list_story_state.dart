@@ -43,27 +43,3 @@ class ListStoryFailure extends ListStoryState {
   @override
   List<Object?> get props => [error];
 }
-
-class ListStoryLoadingMore extends ListStoryState {
-  const ListStoryLoadingMore();
-}
-
-class ListStoryLoadMoreSuccess extends ListStoryState {
-  final ListStoryResponse stories;
-
-  const ListStoryLoadMoreSuccess({
-    required this.stories,
-  });
-
-  @override
-  List<Object?> get props => [stories];
-}
-
-class ListStoryLoadMoreFailure extends ListStoryState {
-  final String error;
-
-  const ListStoryLoadMoreFailure({required this.error});
-
-  @override
-  List<Object?> get props => [error];
-}
