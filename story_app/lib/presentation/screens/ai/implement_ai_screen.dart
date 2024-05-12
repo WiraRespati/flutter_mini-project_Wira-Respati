@@ -24,7 +24,7 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
   String? _cityErrorText;
   String? _themeErrorText;
   String? _budgetErrorText;
-  List<String> recommendations = []; // List untuk menyimpan rekomendasi
+  List<String> recommendations = []; 
   bool _isLoading = false;
 
   @override

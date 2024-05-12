@@ -52,7 +52,6 @@ class _ListStoryHighlightWidgetState extends State<ListStoryHighlightWidget> {
         } else if (state is ListStorySuccess) {
           return RefreshIndicator(
             onRefresh: () async {
-              // Trigger refresh when user pulls the screen upwards
               BlocProvider.of<ListStoryBloc>(context)
                   .add(const ListStoryButtonPressed());
             },

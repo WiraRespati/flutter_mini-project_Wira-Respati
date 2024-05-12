@@ -19,13 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.all(32.0),
           child:  Column(
             children: [
-              SizedBox(height: 24), // Tambahkan ruang atas
+              SizedBox(height: 24), 
               HeaderLoginWidget(),
               SizedBox(height: 8),
               FormLoginWidget(),
               SizedBox(height: 24),
               FooterLoginWidget(),
-              SizedBox(height: 24), // Tambahkan ruang bawah
+              SizedBox(height: 24), 
             ],
           ),
         ),

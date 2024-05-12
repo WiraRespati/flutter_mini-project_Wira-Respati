@@ -19,7 +19,7 @@ class StoryHighlightWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: ColorConstant.onPrimaryColor,
-                radius: 44,
+                radius: 42,
                 child: Text(name[0].toUpperCase()),
               ),
                Padding(

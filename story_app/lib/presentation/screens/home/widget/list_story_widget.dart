@@ -18,12 +18,15 @@ class ListStoryWidget extends StatefulWidget {
 
 class _ListStoryWidgetState extends State<ListStoryWidget> {
   final ScrollController _scrollController = ScrollController();
+  late ListStoryBloc _listStoryBloc;
+  bool _isLoadingMore = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    BlocProvider.of<ListStoryBloc>(context).add(const ListStoryButtonPressed());
+    _listStoryBloc = BlocProvider.of<ListStoryBloc>(context);
+    _listStoryBloc.add(const ListStoryButtonPressed());
   }
 
   @override
@@ -33,16 +36,21 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels ==
-            _scrollController.position.minScrollExtent &&
-        _scrollController.position.userScrollDirection ==
-            ScrollDirection.reverse) {
-      BlocProvider.of<ListStoryBloc>(context)
-          .add(const ListStoryButtonPressed());
+    if (_isScrollAtBottom && !_isLoadingMore) {
+      _isLoadingMore = true;
+      _listStoryBloc.add(const LoadMoreStories(nextPage: 2));
     }
   }
 
-  @override
+  bool get _isScrollAtBottom {
+    return _scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent &&
+        _scrollController.position.userScrollDirection ==
+            ScrollDirection.forward;
+  }
+
+
+   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ListStoryBloc, ListStoryState>(
       builder: (context, state) {
@@ -53,15 +61,10 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
         } else if (state is ListStorySuccess) {
           return RefreshIndicator(
             onRefresh: () async {
-              // Trigger refresh when user pulls the screen upwards
-              BlocProvider.of<ListStoryBloc>(context)
-                  .add(const ListStoryButtonPressed());
+              _listStoryBloc.add(const ListStoryButtonPressed());
             },
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: state.stories.listStory?.length,
-              itemBuilder: (context, index) {
-                final story = state.stories.listStory![index];
+            child: Column(
+              children: state.stories.listStory!.map((story) {
                 final date = DateConstant.getTimeDifference(story.createdAt.toString());
                 return StoryItemWidget(
                   name: story.name,
@@ -74,7 +77,7 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
                         arguments: story.id);
                   },
                 );
-              },
+              }).toList(),
             ),
           );
         } else if (state is ListStoryFailure) {
@@ -88,8 +91,7 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
                   IconButton(
                     icon: const Icon(Icons.refresh),
                     onPressed: () {
-                      BlocProvider.of<ListStoryBloc>(context)
-                          .add(const ListStoryButtonPressed());
+                      _listStoryBloc.add(const ListStoryButtonPressed());
                     },
                   )
                 ],
@@ -107,8 +109,7 @@ class _ListStoryWidgetState extends State<ListStoryWidget> {
                   IconButton(
                     icon: const Icon(Icons.refresh),
                     onPressed: () {
-                      BlocProvider.of<ListStoryBloc>(context)
-                          .add(const ListStoryButtonPressed());
+                      _listStoryBloc.add(const ListStoryButtonPressed());
                     },
                   )
                 ],

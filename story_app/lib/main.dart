@@ -47,7 +47,7 @@ void main() {
     ));
   });
 }
-                                   
+
 class MyApp extends StatelessWidget {
   final UserRepository userRepository;
   final StoryRepository storyRepository;
@@ -58,48 +58,47 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<LoginBloc>(
-            create: (context) => LoginBloc(userRepository),
-          ),
-          BlocProvider<RegisterBloc>(
-            create: (context) => RegisterBloc(userRepository),
-          ),
-          BlocProvider<ListStoryBloc>(
-            create: (context) => ListStoryBloc(storyRepository),
-          ),
-          BlocProvider<LocationStoryBloc>(
-            create: (context) => LocationStoryBloc(storyRepository),
-          ),
-          BlocProvider<DetailStoryBloc>(
-            create: (context) => DetailStoryBloc(storyRepository),
-          ),
-          BlocProvider<UploadStoryBloc>(
-            create: (context) => UploadStoryBloc(storyRepository),
-          ),
-          BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(userRepository),
-          ),
-          BlocProvider<ProfileBloc>(
-            create: (context) => ProfileBloc(userRepository),
-          ),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: NameRoutes.initRoute,
-          routes: {
-            NameRoutes.initRoute: (context) => const SplashScreen(),
-            NameRoutes.registerPageRoute: (context) => const RegisterScreen(),
-            NameRoutes.loginPageRoute: (context) => const LoginScreen(),
-            NameRoutes.homePageRoute: (context) => const HomeScreen(),
-            NameRoutes.navigationPageRoute: (context) =>
-                const NavigationScreen(),
-            NameRoutes.detailStoryPageRoute: (context) =>
-                const DetailStoryScreen(),
-          },
-          theme: ThemeData.dark().copyWith(
-              scaffoldBackgroundColor: ColorConstant.mobileBackgroundColor),
-              
-        ));
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(userRepository),
+        ),
+        BlocProvider<RegisterBloc>(
+          create: (context) => RegisterBloc(userRepository),
+        ),
+        BlocProvider<ListStoryBloc>(
+          create: (context) => ListStoryBloc(storyRepository),
+        ),
+        BlocProvider<LocationStoryBloc>(
+          create: (context) => LocationStoryBloc(storyRepository),
+        ),
+        BlocProvider<DetailStoryBloc>(
+          create: (context) => DetailStoryBloc(storyRepository),
+        ),
+        BlocProvider<UploadStoryBloc>(
+          create: (context) => UploadStoryBloc(storyRepository),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(userRepository),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (context) => ProfileBloc(userRepository),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: NameRoutes.initRoute,
+        routes: {
+          NameRoutes.initRoute: (context) => const SplashScreen(),
+          NameRoutes.registerPageRoute: (context) => const RegisterScreen(),
+          NameRoutes.loginPageRoute: (context) => const LoginScreen(),
+          NameRoutes.homePageRoute: (context) => const HomeScreen(),
+          NameRoutes.navigationPageRoute: (context) => const NavigationScreen(),
+          NameRoutes.detailStoryPageRoute: (context) =>
+              const DetailStoryScreen(),
+        },
+        theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: ColorConstant.mobileBackgroundColor),
+      ),
+    );
   }
 }

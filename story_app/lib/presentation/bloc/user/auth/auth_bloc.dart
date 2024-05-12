@@ -27,7 +27,7 @@ import 'auth_state.dart';class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       bool isLoggedIn = await userRepository.isLogin();
       if (isLoggedIn) {
-        emit(AuthSuccess()); // Emitted when logged in
+        emit(AuthSuccess()); 
       } else {
         emit(const AuthFailure(error: 'Not logged in'));
       }

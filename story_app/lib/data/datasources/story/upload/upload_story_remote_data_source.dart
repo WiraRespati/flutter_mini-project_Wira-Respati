@@ -11,12 +11,12 @@ class UploadStoryRemoteDataSource {
 
   Future<UploadStoryResponseModel> uploadStory(
       String token, UploadStoryRequestModel uploadStory) async {
-    final url = '${BaseUrl.baseUrl}/stories'; // Update the URL to /stories
+    final url = '${BaseUrl.baseUrl}/stories'; 
     try {
       final formData = FormData.fromMap({
         'description': uploadStory.description,
         'photo': await MultipartFile.fromFile(uploadStory.photo.path,
-            filename: 'photo.jpg'), // Assuming the photo is a File object
+            filename: 'photo.jpg'), 
         'lat': uploadStory.lat,
         'lon': uploadStory.lon,
       });

@@ -20,12 +20,6 @@ class UploadStoryRequestModel {
       'lat' : lat,
       'lon' :lon
     };
-
-    // if (lat != null && lon != null) {
-    //   json['lat'] = lat;
-    //   json['lon'] = lon;
-    // }
-
     return json;
   }
 }

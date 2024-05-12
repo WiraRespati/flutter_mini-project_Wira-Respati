@@ -13,26 +13,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            title: Row(
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 50,
+            child: Row(
               children: [
+                const SizedBox(width: 12,),
                 const Text(
                   'StoryApp',
-                  style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'BriemHand'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'BriemHand',fontSize: 24),
                 ),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.arrow_drop_down),
                 ),
-              ],
-            ),
-            actions: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Row(
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
                       onPressed: () {},
@@ -43,23 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: const Icon(Icons.message_outlined),
                     ),
                   ],
-                ),
-              )
-            ],
-            floating: true,
-            pinned: true,
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 130,
-              child: ListStoryHighlightWidget(),
+                ))
+              ],
             ),
           ),
-          const SliverFillRemaining(
-            child: ListStoryWidget(),
+          SizedBox(
+            height: 124,
+            width: MediaQuery.of(context)
+                .size
+                .width, 
+            child: const ListStoryHighlightWidget(),
           ),
+          const ListStoryWidget(),
         ],
       ),
     );
+
   }
 }

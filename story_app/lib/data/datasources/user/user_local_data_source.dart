@@ -46,7 +46,7 @@ class UserLocalDataSource {
       return sharedPreferences.getString(tokenKey) ?? '';
     } catch (e) {
      
-      return ''; // Or return a default value if desired
+      return ''; 
     }
   }
 }

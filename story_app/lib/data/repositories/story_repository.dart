@@ -1,5 +1,3 @@
-
-
 import 'package:story_app/data/datasources/story/upload/upload_story_remote_data_source.dart';
 import 'package:story_app/data/models/story/detail_story_response.dart';
 import 'package:story_app/data/models/story/list_story_response.dart';
@@ -26,9 +24,9 @@ class StoryRepository {
       this.uploadStoryRemoteDataSource,
       this.locationStoryRemoteDataSource);
 
-  Future<ListStoryResponse> getAllStories() async {
+  Future<ListStoryResponse> getAllStories({int page = 1}) async {
     final token = await userLocalDataSource.getToken();
-    return listStoryRemoteDataSource.getAllStories(token: token);
+    return listStoryRemoteDataSource.getAllStories(token: token, page: page);
   }
 
   Future<List<ListStory>> getLocations() async {

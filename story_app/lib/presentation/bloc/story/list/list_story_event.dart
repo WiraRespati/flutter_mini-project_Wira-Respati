@@ -14,3 +14,11 @@ class ListStoryButtonPressed extends ListStoryEvent {
   List<Object?> get props => [];
 }
 
+class LoadMoreStories extends ListStoryEvent {
+  final int nextPage;
+
+  const LoadMoreStories({required this.nextPage});
+
+  @override
+  List<Object?> get props => [nextPage];
+}

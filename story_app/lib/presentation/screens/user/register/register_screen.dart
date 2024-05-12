@@ -19,13 +19,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.all(32.0),
           child: Column(
             children: [
-              SizedBox(height: 24), // Tambahkan ruang atas
+              SizedBox(height: 24), 
               HeaderRegisterWidget(),
               SizedBox(height: 8),
               FormRegisterWidget(),
               SizedBox(height: 24),
               FooterRegisterWidget(),
-              SizedBox(height: 24), // Tambahkan ruang bawah
+              SizedBox(height: 24), 
             ],
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../../../../data/models/story/list_story_response.dart';
+import 'package:story_app/data/models/story/list_story_response.dart';
 
 abstract class ListStoryState extends Equatable {
   const ListStoryState();
@@ -31,10 +30,40 @@ class ListStorySuccess extends ListStoryState {
       stories: stories,
     );
   }
+
+  @override
+  List<Object?> get props => [stories];
 }
 
 class ListStoryFailure extends ListStoryState {
   final String error;
 
   const ListStoryFailure({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class ListStoryLoadingMore extends ListStoryState {
+  const ListStoryLoadingMore();
+}
+
+class ListStoryLoadMoreSuccess extends ListStoryState {
+  final ListStoryResponse stories;
+
+  const ListStoryLoadMoreSuccess({
+    required this.stories,
+  });
+
+  @override
+  List<Object?> get props => [stories];
+}
+
+class ListStoryLoadMoreFailure extends ListStoryState {
+  final String error;
+
+  const ListStoryLoadMoreFailure({required this.error});
+
+  @override
+  List<Object?> get props => [error];
 }

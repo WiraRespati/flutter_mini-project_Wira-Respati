@@ -62,11 +62,11 @@ class StoryItemWidget extends StatelessWidget {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.6,
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/loading.gif',
                     image: photoUrl!,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 Row(
