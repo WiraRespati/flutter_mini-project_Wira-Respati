@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story_app/presentation/bloc/story/list/list_story_bloc.dart';
-import 'package:story_app/presentation/bloc/story/list/list_story_event.dart';
 import 'package:story_app/presentation/screens/home/widget/home_appbar_widget.dart';
 import 'package:story_app/presentation/screens/home/widget/list_story_highlight_widget.dart';
 import 'package:story_app/presentation/screens/home/widget/list_story_widget.dart';

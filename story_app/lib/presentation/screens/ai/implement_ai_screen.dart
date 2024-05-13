@@ -6,7 +6,7 @@ import 'package:story_app/presentation/widgets/text_field_input.dart';
 import 'package:story_app/utils/constant/validation.dart';
 
 class ImplementAIScreen extends StatefulWidget {
-  const ImplementAIScreen({Key? key}) : super(key: key);
+  const ImplementAIScreen({super.key});
 
   @override
   State<ImplementAIScreen> createState() => _ImplementAIScreenState();
@@ -24,7 +24,7 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
   String? _cityErrorText;
   String? _themeErrorText;
   String? _budgetErrorText;
-  List<String> recommendations = []; 
+  List<String> recommendations = [];
   bool _isLoading = false;
 
   @override
@@ -50,7 +50,7 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
     setState(() {
       _isLoading = true;
     });
-    await Gemini.instance.streamGenerateContent(question).forEach((event) {
+    await for (var event in Gemini.instance.streamGenerateContent(question)) {
       final responseParts = event.content?.parts;
       if (responseParts != null) {
         String response = '';
@@ -65,14 +65,29 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
         _themeController.clear();
         _budgetController.clear();
       }
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("AI to Recommend cool places",style: TextStyle(fontFamily: 'BriemHand'),),
+        title: const Text(
+          "Recommend With AI",
+          style: TextStyle(fontFamily: 'BriemHand'),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                _cityController.clear();
+                _themeController.clear();
+                _budgetController.clear();
+                setState(() {
+                  recommendations = [];
+                });
+              },
+              icon: const Icon(Icons.refresh))
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -80,6 +95,23 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    'assets/gemini.png',
+                    fit: BoxFit.cover,
+                  )),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Fill the form to get recommendations cool place from AI',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextFieldInput(
@@ -177,12 +209,10 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
                             color: Colors.white,
                             strokeWidth: 2.0,
                           ),
-                          // Tampilkan indikator loading jika sedang loading
                         )
                       : const Text("Generate"),
                 ),
               ),
-              // Tampilkan semua rekomendasi dalam list
               if (recommendations.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -195,15 +225,14 @@ class _ImplementAIScreenState extends State<ImplementAIScreen> {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8.0),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: recommendations.length,
-                        itemBuilder: (context, index) {
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: recommendations.map((recommendation) {
                           return Text(
-                            '${index + 1}. ${recommendations[index]}',
+                            '${recommendations.indexOf(recommendation) + 1}. $recommendation',
                             style: const TextStyle(fontSize: 16),
                           );
-                        },
+                        }).toList(),
                       ),
                     ],
                   ),

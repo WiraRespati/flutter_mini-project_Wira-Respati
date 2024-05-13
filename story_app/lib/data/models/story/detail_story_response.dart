@@ -36,6 +36,7 @@ class DetailStory {
     this.lat,
     this.lon,
   });
+  
   factory DetailStory.fromJson(Map<String, dynamic> json) {
     return DetailStory(
       id: json['id'],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:story_app/presentation/bloc/user/profile/profile_bloc.dart';
 import 'package:story_app/presentation/bloc/user/profile/profile_state.dart';
-
+import 'package:story_app/presentation/screens/user/profile/button_profile_widget.dart';
 import '../../../../utils/constant/color_constant.dart';
 import '../../../../utils/constant/name_routes.dart';
 import '../../../bloc/story/detail/detail_story_state.dart';
@@ -114,7 +114,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         )
                       ],
                     ),
-                   
                     const Row(
                       children: [
                         Padding(
@@ -168,7 +167,114 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonProfile(
+                      widget: const Text('Edit Profile'),
+                      width: 150,
+                      height: 30,
+                      onTap: () {
+                        ShowDialogWidget.showErrorDialog(
+                          title: 'Coming Soon',
+                          message: 'This feature is not available yet',
+                          context: context,
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    ButtonProfile(
+                      widget: const Text('Share Profile'),
+                      width: 150,
+                      height: 30,
+                      onTap: () {
+                        ShowDialogWidget.showErrorDialog(
+                          title: 'Coming Soon',
+                          message: 'This feature is not available yet',
+                          context: context,
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    ButtonProfile(
+                      widget: const Icon(Icons.person_add_outlined),
+                      width: 30,
+                      height: 30,
+                      onTap: () {
+                        ShowDialogWidget.showErrorDialog(
+                          title: 'Coming Soon',
+                          message: 'This feature is not available yet',
+                          context: context,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                DefaultTabController(
+                  length: 3,
+                  child: TabBar(
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: ColorConstant.primaryColor,
+                    tabs: [
+                      Tab(
+                        icon: IconButton(
+                          icon: Icon(
+                            Icons.grid_on,
+                            color: ColorConstant.primaryColor,
+                          ),
+                          onPressed: () {
+                            ShowDialogWidget.showErrorDialog(
+                              title: 'Coming Soon',
+                              message: 'This feature is not available yet',
+                              context: context,
+                            );
+                          },
+                        ),
+                      ),
+                      Tab(
+                        icon: IconButton(
+                          icon: Icon(
+                            Icons.live_tv,
+                            color: ColorConstant.primaryColor,
+                          ),
+                          onPressed: () {
+                            ShowDialogWidget.showErrorDialog(
+                              title: 'Coming Soon',
+                              message: 'This feature is not available yet',
+                              context: context,
+                            );
+                          },
+                        ),
+                      ),
+                      Tab(
+                        icon: IconButton(
+                          icon: Icon(
+                            Icons.assignment_ind_outlined,
+                            color: ColorConstant.primaryColor,
+                          ),
+                          onPressed: () {
+                            ShowDialogWidget.showErrorDialog(
+                              title: 'Coming Soon',
+                              message: 'This feature is not available yet',
+                              context: context,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 96),
+                const Text("Coming soon...")
               ],
             ),
           );
