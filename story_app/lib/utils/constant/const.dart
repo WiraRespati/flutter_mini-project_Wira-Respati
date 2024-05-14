@@ -1,1 +1,3 @@
-const String geminiKey = "AIzaSyB1hMWCQ532XKsTwGNe_HWvjDmRZ8JoYFo";
+import 'package:story_app/env/env.dart';
+
+const String geminiKey = Env.apiKey;
